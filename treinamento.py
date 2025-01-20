@@ -9,11 +9,10 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator, load_img, i
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from sklearn.metrics import classification_report, confusion_matrix
 
-input_shape = (128, 128, 1)  
-num_classes = 2 
 
 def create_model():
-
+    input_shape = (128, 128, 1)
+    num_classes = 2 
     model = Sequential([
         Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),
         MaxPooling2D((2, 2)),
@@ -48,9 +47,9 @@ def load_data_from_csv(image_dir, csv_path):
             labels.append(0 if row['rotulo'] == 'n' else 1)
     return np.array(images), np.array(labels)
 
-def main():
-    image_dir = 'dataset'  
-    csv_path = 'rotulo.csv'  
+def main(model_name):
+    image_dir = 'dataset'
+    csv_path = 'rotulo.csv'
     images, labels = load_data_from_csv(image_dir, csv_path)
 
     data_gen = ImageDataGenerator(
@@ -84,4 +83,4 @@ def main():
         print(f'Fold {fold} concluído.')
         fold += 1
 
-    model.save('damage_classification_model.h5')
+    model.save(model_name)
