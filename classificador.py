@@ -3,7 +3,6 @@ from tkinter import filedialog
 from tkinter.ttk import Label, Style, Frame
 from PIL import Image, ImageTk
 import numpy as np
-import tensorflow as tf
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 
@@ -49,9 +48,7 @@ def classify_image(model, img_label, result_label):
         result_label.config(text=f"Erro ao processar: {e}", foreground="red")
 
 
-def main(model_path):
-    model = tf.keras.models.load_model(model_path)
-
+def main(model):
     root = tk.Tk()
     root.title("Classificador de Imagens - Dano ou Não")
     root.geometry("800x900")

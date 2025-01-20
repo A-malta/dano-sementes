@@ -1,7 +1,6 @@
 import os
 import numpy as np
 import pandas as pd
-import tensorflow as tf
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -19,8 +18,7 @@ def load_test_data(image_dir, csv_path):
             labels.append(0 if row['rotulo'] == 'n' else 1)
     return np.array(images), np.array(labels)
 
-def main(model_path):
-    model = tf.keras.models.load_model(model_path)
+def main(model):
     image_dir = 'dataset'  
     csv_path = 'rotulo.csv'  
     x_test, y_test = load_test_data(image_dir, csv_path)

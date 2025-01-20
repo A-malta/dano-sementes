@@ -2,6 +2,7 @@ import numpy as np
 import os
 import pandas as pd
 import tensorflow as tf
+from tensorflow.keras import Input
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from sklearn.model_selection import KFold
@@ -14,7 +15,8 @@ def create_model():
     input_shape = (128, 128, 1)
     num_classes = 2 
     model = Sequential([
-        Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),
+        Input(shape=input_shape),
+        Conv2D(32, (3, 3), activation='relu'),
         MaxPooling2D((2, 2)),
 
         Conv2D(64, (3, 3), activation='relu'),
@@ -48,8 +50,8 @@ def load_data_from_csv(image_dir, csv_path):
     return np.array(images), np.array(labels)
 
 def main(model_name):
-    image_dir = 'dataset'
-    csv_path = 'rotulo.csv'
+    image_dir = 'dataset'  
+    csv_path = 'rotulo.csv'  
     images, labels = load_data_from_csv(image_dir, csv_path)
 
     data_gen = ImageDataGenerator(
